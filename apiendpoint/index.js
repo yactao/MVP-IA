@@ -1,13 +1,19 @@
-const { app } = require('@azure/functions');
+module.exports = async function (context, req) {
+    context.log('Processing request for apiendpoint.');
 
-app.http('apiendpoint', {
-    methods: ['GET', 'POST'],
-    authLevel: 'anonymous',
-    handler: async (request, context) => {
-        context.log(`Http function processed request for url "${request.url}"`);
-
-        const name = request.query.get('name') || await request.text() || 'world';
-
-        return { body: `Hello, ${name}!` };
+    const queryParam = req.query.query || (req.body && req.body.query);
+    if (!queryParam) {
+        context.res = {
+            status: 400,
+            body: "Veuillez fournir le paramètre 'query'."
+        };
+        return;
     }
-});
+
+    const result = queryParam.toUpperCase();
+
+    context.res = {
+        status: 200,
+        body: { result }
+    };
+};
