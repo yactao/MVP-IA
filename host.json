@@ -1,5 +1,12 @@
 {
   "version": "2.0",
+  "extensionBundle": {
+    "id": "Microsoft.Azure.Functions.ExtensionBundle",
+    "version": "[4.*, 5.0.0)"
+  },
+  "functions": [
+    "apiendpoint"
+  ],
   "logging": {
     "applicationInsights": {
       "samplingSettings": {
@@ -7,9 +14,5 @@
         "excludedTypes": "Request"
       }
     }
-  },
-  "extensionBundle": {
-    "id": "Microsoft.Azure.Functions.ExtensionBundle",
-    "version": "[4.*, 5.0.0)"
   }
 }
